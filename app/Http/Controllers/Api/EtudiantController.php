@@ -17,7 +17,7 @@ class EtudiantController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:etudiants',
             'phone' => 'required|string|max:20',
-            'password' => 'required|string|min:4|con',
+            'password' => 'required|string|min:4|confirmed',
         ]);
 
         $etudiant = Etudiant::create([
