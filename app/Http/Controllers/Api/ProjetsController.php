@@ -29,7 +29,21 @@ class ProjetsController extends Controller
             'projet' => $projet
         ], 201);
     }
-    public function delete( $id){
+    public function delete( $id)
+    {
+        $etudiant_id = Auth::user()->id;
+        if (!Projet::where('id', $id)->where('etudiant_id', $etudiant_id)->exists()) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Projet not found'
+            ], 404);
+        }
+        $projet = Projet::where('id', $id)->where('etudiant_id', $etudiant_id)->first();
+        $projet->delete();
+        return response()->json([
+            'status' => 1,
+            'message' => 'Projet deleted successfully'
+        ], 200);
 
     }
     public function list()
