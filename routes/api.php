@@ -10,7 +10,7 @@ Route::post('register', [EtudiantController::class, 'register']);
 Route::post('login', [EtudiantController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('logout', [EtudiantController::class, 'logout']);
+    Route::get('logout', [EtudiantController::class, 'logout']);
     Route::get('profile', [EtudiantController::class, 'profile']);
 
     Route::post('cree_projet', [ProjetsController::class, 'create']);
