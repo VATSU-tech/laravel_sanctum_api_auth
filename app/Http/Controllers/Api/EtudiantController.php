@@ -69,7 +69,11 @@ class EtudiantController extends Controller
     }
     public function logout(Request $request)
     {
-        
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'status' => 1,
+            'message' => 'Etudiant logged out successfully',
+        ], 200);
     }
     public function profile(Request $request)
     {
