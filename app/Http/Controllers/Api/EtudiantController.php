@@ -69,10 +69,14 @@ class EtudiantController extends Controller
     }
     public function logout(Request $request)
     {
-
+        
     }
     public function profile(Request $request)
     {
-
+        return response()->json([
+            'status' => 1,
+            'message' => 'Etudiant profile retrieved successfully',
+            'etudiant' => $request->user(),
+        ], 200);
     }
 }
