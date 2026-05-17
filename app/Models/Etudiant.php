@@ -8,8 +8,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Etudiant extends Model
 {
-    use HasFactory;
-    use HasApiTokens;
+    use HasFactory, HasApiTokens;
     protected $table = 'etudiants';
     protected $fillable = [
         'name',
