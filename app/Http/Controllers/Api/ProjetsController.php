@@ -32,7 +32,15 @@ class ProjetsController extends Controller
     public function delete( $id){
 
     }
-    public function list( $id){
+    public function list()
+    {
+        $etudiant_id = Auth::user()->id;
+        $projets = Projet::where('etudiant_id', $etudiant_id)->get();
+        return response()->json([
+            'status' => 1,
+            'message' => 'Projets found',
+            'projets' => $projets
+        ], 200);
 
     }
     public function details( $id)
