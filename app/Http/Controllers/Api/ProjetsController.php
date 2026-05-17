@@ -73,7 +73,36 @@ class ProjetsController extends Controller
             'projet' => $projet
         ], 200);
     }
-    public function register(Request $request){
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'string|max:255',
+            'duree' => 'integer|min:0',
+            'description' => 'string',
+        ]);
+        $etudiant_id = Auth::user()->id;
+        if (!Projet::where('id', $id)->where('etudiant_id', $etudiant_id)->exists()) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Projet not found'
+            ], 404);
+        }
+        $projet = Projet::where('id', $id)->where('etudiant_id', $etudiant_id)->first();
+        if ($request->name) {
+            $projet->name = $request->name;
+        }
+        if ($request->duree) {
+            $projet->duree = $request->duree;
+        }
+        if ($request->description) {
+            $projet->description = $request->description;
+        }
+        $projet->save();
+        return response()->json([
+            'status' => 1,
+            'message' => 'Projet updated successfully',
+            'projet' => $projet
+        ], 200);
 
     }
 }

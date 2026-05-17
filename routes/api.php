@@ -17,6 +17,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('delete_projet/{id}', [ProjetsController::class, 'delete']);
     Route::get('list_projet', [ProjetsController::class,'list']);
     Route::get('details_projet/{id}', [ProjetsController::class,'details']);
+    Route::post('update_projet/{id}', [ProjetsController::class,'update']);
 });
 
 Route::get('/user', function (Request $request) {
