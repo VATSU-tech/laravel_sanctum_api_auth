@@ -35,8 +35,21 @@ class ProjetsController extends Controller
     public function list( $id){
 
     }
-    public function details( $id){
-
+    public function details( $id)
+    {
+        $etudiant_id = Auth::user()->id;
+        $projet = Projet::where('id', $id)->where('etudiant_id', $etudiant_id)->get();
+        if (!Projet::where('id', $id)->where('etudiant_id', $etudiant_id)->exists()) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Projet not found'
+            ], 404);
+        }
+        return response()->json([
+            'status' => 1,
+            'message' => 'Projet found',
+            'projet' => $projet
+        ], 200);
     }
     public function register(Request $request){
 
